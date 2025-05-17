@@ -24,8 +24,8 @@ const projects = [
   },
   {
     title: "Emotion Detector",
-    desc: "https://github.com/Junaid2002/EMOTION_DETECTOR.git",
-    github: "https://github.com/yourusername/emotion-detector",
+    desc: "ML project that detects your emotion through your text",
+    github: "https://github.com/Junaid2002/EMOTION_DETECTOR.git",
     icon: <i className="fab fa-python" style={{ color: '#facc15', fontSize: '2.5rem' }}></i>,
     tech: "Python"
   },
