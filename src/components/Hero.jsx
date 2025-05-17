@@ -90,7 +90,7 @@ const Hero = () => {
 
   return (
     <section
-      className="bg-[url('../assets/bg.jpg')] bg-cover bg-center bg-no-repeat h-[100vh] w-[100vw] m-0 p-0 flex flex-col justify-between overflow-hidden box-border relative
+      className="bg-[url('../assets/bg.jpg')] bg-cover bg-center bg-no-repeat min-h-[100vh] w-[100vw] m-0 p-0 flex flex-col justify-between overflow-hidden box-border relative
                  before:content-[''] before:absolute before:inset-0 before:bg-[linear-gradient(135deg,rgba(11,12,16,0.7),rgba(11,12,16,0.7))] before:z-0
                  after:content-[''] after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_50%,rgba(97,218,251,0.1)_0%,transparent_70%)] after:opacity-30 after:z-0 after:animate-[pulse_15s_infinite_ease-in-out]"
     >
@@ -98,9 +98,10 @@ const Hero = () => {
         html, body, #root {
           margin: 0;
           padding: 0;
-          height: 100vh;
-          width: 100vw;
-          overflow: hidden;
+          height: 100%;
+          width: 100%;
+          overflow: auto; /* <-- ENABLE SCROLLING */
+          -webkit-overflow-scrolling: touch;
         }
         @keyframes pulse {
           0% { transform: scale(1); opacity: 0.3; }
@@ -114,11 +115,7 @@ const Hero = () => {
         }
       `}</style>
 
-      <Container
-        fluid
-        className="flex-none w-full p-[1rem_1.5rem_at_768px] p-[0.5rem_at_0] m-0 box-border relative z-10"
-        id="home"
-      >
+      <Container fluid className="flex-none w-full p-[1rem_1.5rem_at_768px] p-[0.5rem_at_0] m-0 box-border relative z-10" id="home">
         <Row className="items-center min-h-[30vh] w-full m-0">
           <Col md={12} className="text-left p-[0_15px_at_768px] p-[0_10px_at_0]">
             <motion.h1
@@ -141,9 +138,7 @@ const Hero = () => {
               transition={{ delay: 0.2 }}
             >
               I'M{" "}
-              <span
-                className="text-[#61dafb] animate-[glow_3s_infinite_ease-in-out]"
-              >
+              <span className="text-[#61dafb] animate-[glow_3s_infinite_ease-in-out]">
                 JUNAID ASHRAF KHAN
               </span>
             </motion.h1>
@@ -164,15 +159,9 @@ const Hero = () => {
         </Row>
       </Container>
 
-      <Container
-        className="flex-1 w-full m-0 p-[1rem_1.5rem_at_768px] p-[0.5rem_at_0] overflow-hidden box-border relative z-10"
-        id="about"
-      >
+      <Container className="flex-1 w-full m-0 p-[1rem_1.5rem_at_768px] p-[0.5rem_at_0] overflow-hidden box-border relative z-10" id="about">
         <Row className="items-center w-full m-0">
-          <Col
-            md={8}
-            className="text-[clamp(0.9rem,2.5vw,1.1rem)] leading-[1.5] p-[0_15px_at_768px] p-[0_10px_at_0]"
-          >
+          <Col md={8} className="text-[clamp(0.9rem,2.5vw,1.1rem)] leading-[1.5] p-[0_15px_at_768px] p-[0_10px_at_0]">
             <motion.h1
               className="text-[clamp(1.5rem,4vw,2em)] mb-[1rem]"
               variants={headingVariants}
@@ -180,8 +169,7 @@ const Hero = () => {
               animate="visible"
               transition={{ delay: 0.4 }}
             >
-              LET ME{" "}
-              <span className="text-[#61dafb]">INTRODUCE</span> MYSELF
+              LET ME <span className="text-[#61dafb]">INTRODUCE</span> MYSELF
             </motion.h1>
             <motion.p
               className="home-about-body"
@@ -195,10 +183,8 @@ const Hero = () => {
               <br />
               <br />
               I have hands-on experience with technologies like{" "}
-              <b className="text-[#61dafb]">
-                React.js, Node.js, Express.js
-              </b>
-              , and <b className="text-[#61dafb]">MongoDB</b>.
+              <b className="text-[#61dafb]">React.js, Node.js, Express.js</b>,
+              and <b className="text-[#61dafb]">MongoDB</b>.
               <br />
               <br />
               I'm also exploring the world of{" "}
@@ -211,10 +197,7 @@ const Hero = () => {
             </motion.p>
           </Col>
 
-          <Col
-            md={4}
-            className="text-center mt-[1rem] p-[0_15px_at_768px] p-[0_10px_at_0] overflow-hidden"
-          >
+          <Col md={4} className="text-center mt-[1rem] p-[0_15px_at_768px] p-[0_10px_at_0] overflow-hidden">
             <motion.img
               src={avatar}
               className="rounded-full max-w-[min(250px,100%)] h-auto"
@@ -249,13 +232,24 @@ const Hero = () => {
           Feel free to{" "}
           <span className="text-[#61dafb]">connect</span> with me
         </motion.p>
-        <ul
-          className="list-none flex justify-center gap-[2rem] pl-0 mb-0"
-        >
+        <ul className="list-none flex justify-center gap-[2rem] pl-0 mb-0">
           {[
-            { href: "https://www.instagram.com/ayan._khan10?igsh=MXRwZnM0aTB4bHFreg==", icon: <FaInstagram />, color: "#E4405F" },
-            { href: "https://github.com/Junaid2002", icon: <FaGithub />, color: "#6cc644" },
-            { href: "https://www.linkedin.com/in/junaid-ashraf-khan-565734297?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", icon: <FaLinkedin />, color: "#0A66C2" },
+            {
+              href: "https://www.instagram.com/ayan._khan10?igsh=MXRwZnM0aTB4bHFreg==",
+              icon: <FaInstagram />,
+              color: "#E4405F",
+            },
+            {
+              href: "https://github.com/Junaid2002",
+              icon: <FaGithub />,
+              color: "#6cc644",
+            },
+            {
+              href:
+                "https://www.linkedin.com/in/junaid-ashraf-khan-565734297?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+              icon: <FaLinkedin />,
+              color: "#0A66C2",
+            },
           ].map((social, index) => (
             <motion.li
               key={index}
