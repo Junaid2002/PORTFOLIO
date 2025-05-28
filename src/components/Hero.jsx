@@ -100,7 +100,7 @@ const Hero = () => {
           padding: 0;
           height: 100%;
           width: 100%;
-          overflow: auto; /* <-- ENABLE SCROLLING */
+          overflow: auto;
           -webkit-overflow-scrolling: touch;
         }
         @keyframes pulse {
@@ -113,13 +113,117 @@ const Hero = () => {
           50% { text-shadow: 0 0 20px rgba(97, 218, 251, 0.8); }
           100% { text-shadow: 0 0 5px rgba(97, 218, 251, 0.5); }
         }
+        /* Loader styles from Uiverse.io by alexruix */
+        .loader {
+          position: relative;
+          width: clamp(80px, 10vw, 120px);
+          height: clamp(60px, 7.5vw, 90px);
+          margin: 2rem auto;
+        }
+        .loader:before {
+          content: "";
+          position: absolute;
+          bottom: 30px;
+          left: 50px;
+          height: clamp(20px, 2.5vw, 30px);
+          width: clamp(20px, 2.5vw, 30px);
+          border-radius: 50%;
+          background: #2a9d8f;
+          animation: loading-bounce 0.5s ease-in-out infinite alternate;
+        }
+        .loader:after {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 0;
+          height: clamp(5px, 0.6vw, 7px);
+          width: clamp(30px, 3.75vw, 45px);
+          border-radius: 4px;
+          box-shadow: 0 5px 0 #f2f2f2, -35px 50px 0 #f2f2f2, -70px 95px 0 #f2f2f2;
+          animation: loading-step 1s ease-in-out infinite;
+        }
+        @keyframes loading-bounce {
+          0% {
+            transform: scale(1, 0.7);
+          }
+          40% {
+            transform: scale(0.8, 1.2);
+          }
+          60% {
+            transform: scale(1, 1);
+          }
+          100% {
+            bottom: clamp(100px, 12vw, 140px);
+          }
+        }
+        @keyframes loading-step {
+          0% {
+            box-shadow: 0 10px 0 rgba(0, 0, 0, 0),
+                        0 10px 0 #f2f2f2,
+                        -35px 50px 0 #f2f2f2,
+                        -70px 90px 0 #f2f2f2;
+          }
+          100% {
+            box-shadow: 0 10px 0 #f2f2f2,
+                        -35px 50px 0 #f2f2f2,
+                        -70px 90px 0 #f2f2f2,
+                        -70px 90px 0 rgba(0, 0, 0, 0);
+          }
+        }
+        @media (max-width: 768px) {
+          .loader {
+            width: clamp(60px, 15vw, 80px);
+            height: clamp(45px, 11.25vw, 60px);
+          }
+          .loader:before {
+            left: clamp(30px, 7.5vw, 40px);
+            bottom: 20px;
+            height: clamp(15px, 3.75vw, 20px);
+            width: clamp(15px, 3.75vw, 20px);
+          }
+          .loader:after {
+            height: clamp(4px, 1vw, 5px);
+            width: clamp(20px, 5vw, 30px);
+            box-shadow: 0 3px 0 #f2f2f2, -25px 35px 0 #f2f2f2, -50px 65px 0 #f2f2f2;
+          }
+          @keyframes loading-bounce {
+            0% {
+              transform: scale(1, 0.7);
+            }
+            40% {
+              transform: scale(0.8, 1.2);
+            }
+            60% {
+              transform: scale(1, 1);
+            }
+            100% {
+              bottom: clamp(70px, 17.5vw, 100px);
+            }
+          }
+          @keyframes loading-step {
+            0% {
+              box-shadow: 0 6px 0 rgba(0, 0, 0, 0),
+                          0 6px 0 #f2f2f2,
+                          -25px 35px 0 #f2f2f2,
+                          -50px 65px 0 #f2f2f2;
+            }
+            100% {
+              box-shadow: 0 6px 0 #f2f2f2,
+                          -25px 35px 0 #f2f2f2,
+                          -50px 65px 0 #f2f2f2,
+                          -50px 65px 0 rgba(0, 0, 0, 0);
+            }
+          }
+        }
       `}</style>
 
-      <Container fluid className="flex-none w-full p-[1rem_1.5rem_at_768px] p-[0.5rem_at_0] m-0 box-border relative z-10" id="home">
-        <Row className="items-center min-h-[30vh] w-full m-0">
-          <Col md={12} className="text-left p-[0_15px_at_768px] p-[0_10px_at_0]">
+      <div className="loader"></div>
+
+      <Container fluid className="flex-none w-[100vw] p-[2rem_2.5rem_at_768px] p-[1rem_at_0] m-0 box-border relative z-10" id="home">
+        <Row className="items-center min-h-[35vh] w-full m-0">
+          <Col md={12} className="text-left p-[0_20px_at_768px] p-[0_15px_at_0]">
             <motion.h1
-              className="pb-[15px] m-0"
+              className="pb-[20px] m-0 text-[clamp(2rem,6vw,2.5rem)]"
               variants={headingVariants}
               initial="hidden"
               animate="visible"
@@ -131,7 +235,7 @@ const Hero = () => {
             </motion.h1>
 
             <motion.h1
-              className="font-bold text-[clamp(1.5rem,5vw,2rem)] my-[0.5rem]"
+              className="font-bold text-[clamp(2.5rem,7vw,3rem)] my-[0.75rem]"
               variants={headingVariants}
               initial="hidden"
               animate="visible"
@@ -143,7 +247,7 @@ const Hero = () => {
               </span>
             </motion.h1>
 
-            <div className="p-[1.5rem_0] text-[clamp(1.5rem,5vw,2rem)] min-h-[70px]">
+            <div className="p-[2rem_0] text-[clamp(2rem,6vw,2.5rem)] min-h-[80px]">
               <Type
                 texts={[
                   "Full Stack Developer",
@@ -159,11 +263,11 @@ const Hero = () => {
         </Row>
       </Container>
 
-      <Container className="flex-1 w-full m-0 p-[1rem_1.5rem_at_768px] p-[0.5rem_at_0] overflow-hidden box-border relative z-10" id="about">
+      <Container className="flex-1 w-[100vw] m-0 p-[2rem_2.5rem_at_768px] p-[1rem_at_0] overflow-hidden box-border relative z-10" id="about">
         <Row className="items-center w-full m-0">
-          <Col md={8} className="text-[clamp(0.9rem,2.5vw,1.1rem)] leading-[1.5] p-[0_15px_at_768px] p-[0_10px_at_0]">
+          <Col md={8} className="text-[clamp(1.2rem,3vw,1.4rem)] leading-[1.6] p-[0_20px_at_768px] p-[0_15px_at_0]">
             <motion.h1
-              className="text-[clamp(1.5rem,4vw,2em)] mb-[1rem]"
+              className="text-[clamp(2rem,5vw,2.5rem)] mb-[1.5rem]"
               variants={headingVariants}
               initial="hidden"
               animate="visible"
@@ -197,10 +301,10 @@ const Hero = () => {
             </motion.p>
           </Col>
 
-          <Col md={4} className="text-center mt-[1rem] p-[0_15px_at_768px] p-[0_10px_at_0] overflow-hidden">
+          <Col md={4} className="text-center mt-[1.5rem] p-[0_20px_at_768px] p-[0_15px_at_0] overflow-hidden">
             <motion.img
               src={avatar}
-              className="rounded-full max-w-[min(250px,100%)] h-auto"
+              className="rounded-full max-w-[min(300px,100%)] h-auto"
               alt="avatar"
               variants={avatarVariants}
               initial="hidden"
@@ -213,10 +317,10 @@ const Hero = () => {
 
       <Container
         fluid
-        className="flex-none w-full m-0 p-[1rem_1.5rem_at_768px] p-[0.5rem_at_0] text-center box-border relative z-10"
+        className="flex-none w-[100vw] m-0 p-[2rem_2.5rem_at_768px] p-[1rem_at_0] text-center box-border relative z-10"
       >
         <motion.h1
-          className="text-[clamp(1.5rem,4vw,1.75rem)] m-[0.5rem_0]"
+          className="text-[clamp(2rem,5vw,2.5rem)] m-[0.75rem_0]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
@@ -224,7 +328,7 @@ const Hero = () => {
           FIND ME ON
         </motion.h1>
         <motion.p
-          className="m-[0.5rem_0]"
+          className="m-[0.75rem_0] text-[clamp(1.2rem,3vw,1.4rem)]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1 }}
@@ -232,7 +336,7 @@ const Hero = () => {
           Feel free to{" "}
           <span className="text-[#61dafb]">connect</span> with me
         </motion.p>
-        <ul className="list-none flex justify-center gap-[2rem] pl-0 mb-0">
+        <ul className="list-none flex justify-center gap-[2.5rem] pl-0 mb-0">
           {[
             {
               href: "https://www.instagram.com/ayan._khan10?igsh=MXRwZnM0aTB4bHFreg==",
@@ -253,7 +357,7 @@ const Hero = () => {
           ].map((social, index) => (
             <motion.li
               key={index}
-              className="text-[3.5rem]"
+              className="text-[clamp(4rem,8vw,5rem)]"
               custom={index}
               variants={socialIconVariants}
               initial="hidden"
